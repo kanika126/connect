@@ -1,4 +1,3 @@
-
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Explore from "./pages/Explore";
@@ -11,7 +10,7 @@ import {
 
 function App() {
   return (
-    <div classname="home">
+    <div className="mt-2">
     <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>} />
