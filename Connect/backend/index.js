@@ -1,5 +1,5 @@
 const express = require("express");
-const errorHandler = require("./middleware/errorHandler");
+// const errorHandler = require("./middleware/errorHandler");
 const connectDb = require("./config/dbConnection");
 const dotenv = require("dotenv").config();
 var cors = require('cors')
@@ -9,11 +9,11 @@ const port = process.env.PORT || 5000;
 
 connectDb();
 app.use(cors())
-app.use(errorHandler);
+// app.use(errorHandler);
 app.use(express.json());
-app.use("/api/student", require("./routes/studentRoutes"));
-app.use("/api/course", require("./routes/courseRoutes"));
-app.use("/api/allocation", require("./routes/allocationRoutes"));
+// app.use("/api/student", require("./routes/studentRoutes"));
+// app.use("/api/course", require("./routes/courseRoutes"));
+// app.use("/api/allocation", require("./routes/allocationRoutes"));
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
