@@ -1,7 +1,12 @@
 import React from 'react'
+import LandingPage from '../components/LandingPage'
+import SlideshowComponent from '../components/SlideShow'
 export default function Home() {
     return (
         <div>
-            Home
+            <LandingPage />
+            <SlideshowComponent/>
+            <SlideshowComponent/>
+            <SlideshowComponent/>
         </div>)
 }
