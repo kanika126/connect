@@ -3,6 +3,9 @@ import Home from "./pages/Home";
 import Explore from "./pages/Explore";
 import Contribute from "./pages/Contribute";
 import Footer from "./components/Footer";
+/*import Resources from "./components/Resources";
+import Profile from "./components/Profile";
+import Resumecard from "./pages/Resumecard";*/
 import {
   Routes,
   Route,
@@ -16,6 +19,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/explore" element={<Explore/>} />
         <Route path="/contribute" element={<Contribute/>} />
+       
       </Routes>
       <Footer/>
     </div>

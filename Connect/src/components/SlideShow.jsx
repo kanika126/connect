@@ -101,8 +101,8 @@ const SlideshowComponent = () => {
   ];
 
   return (
-    <div className="h-screen flex flex-col items-center justify-center">
-      <div className="bg-white flex">
+    <div className="h-screen bg-indigo-300 flex flex-col items-center justify-center">
+      <div className=" flex">
         {/* Left half with larger curved rectangular box */}
         <div className="w-1/2 mx-24">
           <div className="bg-gray-300 w-96 h-64 rounded-3xl ">

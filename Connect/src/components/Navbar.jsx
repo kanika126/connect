@@ -2,7 +2,7 @@ const Navbar = () => {
   return (
     
 
-<nav className="bg-teal-100 rounded-lg shadow m-1 dark:bg-grey-800">
+<nav className="bg-indigo-100 rounded-lg shadow m-1 dark:bg-grey-800">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   
       <div className="self-center text-2xl font-semibold whitespace-nowrap text-indigo-600 dark:text-indigo-600">LETSCONNECT.</div>

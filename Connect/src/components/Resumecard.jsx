@@ -1,8 +1,6 @@
 const Resumecard = () => {
     return (
-        <>
-
-        </>
+        <></>
         );
 };
 
