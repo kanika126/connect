@@ -1,0 +1,13 @@
+{
+    "alumni": "6150f53e6d3f540014b74a6d",
+    "description": "Had a great time at the university! Developed and maintained software applications. Developed and maintained software applications.",
+    "time": "2023-11-01T12:00:00Z",
+    "semester": "Sem 4",
+    "tags": ["memories", "university"],
+    "approved": true,
+    "photo": {
+      "data": "base64_encoded_image_data",
+      "contentType": "image/jpeg"
+    }
+  }
+  
