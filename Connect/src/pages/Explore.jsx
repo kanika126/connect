@@ -8,17 +8,17 @@ export default function Explore() {
       <Card
         imageUrl="https://img.freepik.com/free-vector/happy-students-jumping-with-flat-design_23-2147907626.jpg?w=2000"
         title="College Experience"
-        linkUrl="../components/Collegecard"
+        linkUrl="./components/collegecard"
       />
       <Card
         imageUrl="https://media.istockphoto.com/id/1227181130/vector/online-education-and-home-schooling-related-vector-flat-illustration-design.jpg?s=612x612&w=0&k=20&c=H3kjTRtzkzBPIPY9bA0hBn0eM3S0kxSWJlXhgvJHr8Y="
         title="Resume"
-        linkUrl="../components/Resumecard"
+        linkUrl="./components/resumecard"
       />
       <Card
         imageUrl="https://media.istockphoto.com/id/1245995671/vector/open-education-concept-getting-education-online-without-problems-study-in-the-internet.jpg?s=612x612&w=0&k=20&c=hqaTECITsiyvYzW9HWhR3lEw3xlKLSvKpIbnYzOxW5s="
         title="Work Experience"
-        linkUrl="..components/Workcard"
+        linkUrl="./components/workcard"
       />
       {/* Add more cards as needed */}
     </div>
