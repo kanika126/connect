@@ -1,6 +1,8 @@
+import SlideshowComponent from '../components/SlideShow'
 const Resumecard = () => {
     return (
-        <></>
+        <>
+        <SlideshowComponent/></>
         );
 };
 
