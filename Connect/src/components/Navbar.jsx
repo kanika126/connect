@@ -29,6 +29,9 @@ const Navbar = () => {
       <li>
         <a href="/resources" className="block py-2 px-3 text-indigo-600 rounded ">Resources</a>
       </li>
+      <li>
+        <a href="/approve" className="block py-2 px-3 text-indigo-600 rounded ">Approve</a>
+      </li>
     </ul>
   </div>
   </div>

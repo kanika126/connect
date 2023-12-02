@@ -12,13 +12,15 @@ import {
   Routes,
   Route,
 } from "react-router-dom";  
-
+import AdminPage from "./pages/AdminPage";
 function App() {
   return (
     <div className="mt-2">
     <Navbar/>
       <Routes>
+
         <Route path="/" element={<Home/>} />
+        <Route path="/admin" element={<AdminPage/>} />
         <Route path="/explore" element={<Explore/>} />
         <Route path="/contribute" element={<Contribute/>} />
         <Route path="/profile" element={<Profile/>} />

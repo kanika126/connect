@@ -9,7 +9,8 @@ const alumniSchema = new mongoose.Schema({
   phoneNumber: { type: String, required: true },
   linkedinProfile: { type: String, unique: true },
   password: { type: String, required: true },
-
+  currentCompany:{type:String ,required:true, default:'none'},
+  currentCity:{type:String, required:true,default:'none'},
   workExperiences: [
     { type: mongoose.Schema.Types.ObjectId, ref: "WorkExperience" },
   ],
