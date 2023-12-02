@@ -20,7 +20,7 @@ const SlideshowComponent = () => {
         selectRandomTestimonials();
         setIsTransitioning(false);
       }, 500); // Adjust the transition duration as needed
-    }, 30000);//change time according to need
+    }, 2000);//change time according to need
 
     // Clear interval on component unmount
     return () => clearInterval(intervalId);
