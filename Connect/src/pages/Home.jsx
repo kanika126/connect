@@ -5,8 +5,8 @@ export default function Home() {
     return (
         <div>
             <LandingPage />
-            <SlideshowComponent/>
-            <SlideshowComponent/>
+            <SlideshowComponent type="clgexp" />
+            <SlideshowComponent type="workexp"/>
             <SlideshowComponent/>
         </div>)
 }

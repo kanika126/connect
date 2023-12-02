@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Document, Page } from 'react-pdf';
+// import { Document, Page } from 'react-pdf';
 
 const ResumeUpload = () => {
   const [file, setFile] = useState(null);
@@ -72,14 +74,14 @@ const ResumeUpload = () => {
         <h3>All Resumes:</h3>
         {resumes.map((resume) => (
           <div key={resume._id}>
-          <p>{resume.file.filename}</p>
-          <iframe
-            title={`Resume ${resume._id}`}
-            src={`http://localhost:5001/api/resume/${resume._id}`}
-            width="600"
-            height="400"
-          />
-        </div>
+            <p>{resume.file.filename}</p>
+            <Document
+              file={`http://localhost:5001/api/resume/${resume._id}`}
+    
+            >
+              <Page pageNumber={1} />
+            </Document>
+          </div>
         ))}
       </div>
     </div>

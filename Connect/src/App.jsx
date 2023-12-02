@@ -20,7 +20,7 @@ function App() {
     <Navbar/>
       <Routes>
 
-        <Route path="/" element={<ResumeUpload/>} />
+        <Route path="/" element={<Home/>} />
         <Route path="/admin" element={<AdminPage/>} />
         <Route path="/explore" element={<Explore/>} />
         <Route path="/contribute" element={<Contribute/>} />

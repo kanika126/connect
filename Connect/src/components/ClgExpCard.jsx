@@ -1,7 +1,7 @@
 // ProfileCard.js
 import React from "react";
 
-const ProfileCard = ({ imageSrc, name, designation, description, tags }) => {
+const ClgExpCard = ({ imageSrc, name, designation, description, tags }) => {
   const maxTagCharacters = 20; // Set the maximum characters to be displayed for tags
   const maxDisplayCharacters = 5; // Set the maximum characters to display in each tag
 
@@ -45,4 +45,4 @@ const ProfileCard = ({ imageSrc, name, designation, description, tags }) => {
   );
 };
 
-export default ProfileCard;
+export default ClgExpCard;

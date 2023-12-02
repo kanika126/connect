@@ -10,6 +10,7 @@ const collegeExperienceSchema = new mongoose.Schema({
     semester: { type: String, enum: SemesterEnum, default: null }, // Optional field
     tags: [String],  // Tags for searchability
     approved: { type: Boolean, default: false },
+    //image later
     // other fields if needed
 });
 
