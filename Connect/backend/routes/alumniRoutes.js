@@ -4,9 +4,9 @@ const { authenticateUser } = require('../middleware/authMiddleware'); // Import 
 const router = express.Router();
 
 router.route('/')
-    .get(authenticateUser, getAlumni)
-    .post(authenticateUser, addAlumni)
-    .put(authenticateUser, updateAlumni)
-    .delete(authenticateUser, deleteAlumni);
+    .get( getAlumni)
+    .post( addAlumni)
+    .put( updateAlumni)
+    .delete( deleteAlumni);
 
 module.exports = router;

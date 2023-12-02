@@ -16,8 +16,8 @@ app.use(express.json());
 // app.use("/api/allocation", require("./routes/allocationRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/alumni", require("./routes/alumniRoutes"));
-app.use("/api/college-experience", require("./routes/collegeExperienceRoutes"));
-app.use("/api/work-experience", require("./routes/workExperienceRoutes"));
+app.use("/api/clgexp", require("./routes/collegeExperienceRoutes"));
+app.use("/api/workexp", require("./routes/workExperienceRoutes"));
 app.use("/api/resume", require("./routes/resumeRoutes"));
 
 app.listen(port, () => {

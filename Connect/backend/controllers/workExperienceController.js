@@ -1,5 +1,5 @@
 const WorkExperience = require('../models/WorkExperience');
-
+const Alumni = require('../models/Alumni')
 const getWorkExperiences = async (req, res) => {
   try {
     const workExperiences = await WorkExperience.find();
@@ -11,15 +11,50 @@ const getWorkExperiences = async (req, res) => {
 
 const addWorkExperience = async (req, res) => {
   try {
-    // Placeholder logic: Validate input and create a new work experience
-    const newWorkExperience = new WorkExperience(req.body);
-    const savedWorkExperience = await newWorkExperience.save();
+    let workExperiences = req.body;
 
-    res.status(201).json(savedWorkExperience);
+    // If it's not an array, convert it to an array with a single element
+    if (!Array.isArray(workExperiences)) {
+      workExperiences = [workExperiences];
+    }
+
+    const savedWorkExperiences = [];
+    const errors = [];
+
+    for (const workExperienceData of workExperiences) {
+      const newWorkExperience = new WorkExperience(workExperienceData);
+
+      try {
+        // Validate the work experience before saving
+        await newWorkExperience.validate();
+        const savedWorkExperience = await newWorkExperience.save();
+        savedWorkExperiences.push(savedWorkExperience);
+
+        // Update the alumni document to include the saved work experience
+        const alumniId = workExperienceData.alumni;
+        await Alumni.findByIdAndUpdate(
+          alumniId,
+          { $push: { workExperiences: savedWorkExperience._id } },
+          { new: true }
+        );
+      } catch (error) {
+        // Collect errors for erroneous objects
+        errors.push({ data: workExperienceData, error: error.message });
+      }
+    }
+
+    // If there are valid experiences, return a 201 status with the saved experiences
+    // If there are errors, return a 400 status with the error details
+    if (savedWorkExperiences.length > 0) {
+      return res.status(201).json({ savedWorkExperiences, errors });
+    } else {
+      return res.status(400).json({ errors });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 const updateWorkExperience = async (req, res) => {
   try {

@@ -1,4 +1,5 @@
 const CollegeExperience = require('../models/CollegeExperience');
+const Alumni = require('../models/Alumni')
 
 const getCollegeExperiences = async (req, res) => {
   try {
@@ -11,15 +12,50 @@ const getCollegeExperiences = async (req, res) => {
 
 const addCollegeExperience = async (req, res) => {
   try {
-    // Placeholder logic: Validate input and create a new college experience
-    const newCollegeExperience = new CollegeExperience(req.body);
-    const savedCollegeExperience = await newCollegeExperience.save();
+    let collegeExperiences = req.body;
 
-    res.status(201).json(savedCollegeExperience);
+    // If it's not an array, convert it to an array with a single element
+    if (!Array.isArray(collegeExperiences)) {
+      collegeExperiences = [collegeExperiences];
+    }
+
+    const savedCollegeExperiences = [];
+    const errors = [];
+
+    for (const collegeExperienceData of collegeExperiences) {
+      const newCollegeExperience = new CollegeExperience(collegeExperienceData);
+
+      try {
+        // Validate the college experience before saving
+        await newCollegeExperience.validate();
+        const savedCollegeExperience = await newCollegeExperience.save();
+        savedCollegeExperiences.push(savedCollegeExperience);
+
+        // Update the alumni document to include the saved college experience
+        const alumniId = collegeExperienceData.alumni;
+        await Alumni.findByIdAndUpdate(
+          alumniId,
+          { $push: { collegeExperiences: savedCollegeExperience._id } },
+          { new: true }
+        );
+      } catch (error) {
+        // Collect errors for erroneous objects
+        errors.push({ data: collegeExperienceData, error: error.message });
+      }
+    }
+
+    // If there are valid experiences, return a 201 status with the saved experiences
+    // If there are errors, return a 400 status with the error details
+    if (savedCollegeExperiences.length > 0) {
+      return res.status(201).json({ savedCollegeExperiences, errors });
+    } else {
+      return res.status(400).json({ errors });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 const updateCollegeExperience = async (req, res) => {
   try {

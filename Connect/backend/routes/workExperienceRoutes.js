@@ -4,9 +4,9 @@ const { authenticateUser } = require('../middleware/authMiddleware'); // Import 
 const router = express.Router();
 
 router.route('/')
-    .get(authenticateUser, getWorkExperiences)
-    .post(authenticateUser, addWorkExperience)
-    .put(authenticateUser, updateWorkExperience)
-    .delete(authenticateUser, deleteWorkExperience);
+    .get( getWorkExperiences)
+    .post( addWorkExperience)
+    .put( updateWorkExperience)
+    .delete( deleteWorkExperience);
 
 module.exports = router;
