@@ -17,7 +17,8 @@ import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import AuthState from "./context/AuthState";
 import RegisterPage from './pages/RegisterPage'
-import ApprovePage from './components/ApprovePage'
+import ApprovePage from './components/ApprovalWrapperPage'
+
 function App() {
   return (
     <div className="mt-2">
@@ -30,7 +31,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
-        <Route path="/admin" element={<AdminPage/>} />
+        <Route path="/admin/" element={<AdminPage/>} />
         <Route path="/explore" element={<Explore/>} />
         <Route path="/contribute" element={<Contribute/>} />
         <Route path="/profile" element={<Profile/>} />
@@ -38,7 +39,7 @@ function App() {
         <Route path="/resumecard" element={<Resumecard/>} />
         <Route path="/workcard" element={<Workcard/>} />
         <Route path="/collegecard" element={<Collegecard/>} />
-        <Route path="/approve" element={<ApprovePage/>} />
+        <Route path="/approve/*" element={<ApprovePage/>} />
       </Routes>
       </AuthState>
       <Footer/>

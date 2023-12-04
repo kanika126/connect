@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const CollegeExperiencesPage = () => {
+const CollegeApprovePage = () => {
   const [experiences, setExperiences] = useState([]);
 
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/clgexp');
+        const response = await fetch('http://localhost:5001/api/workexp');
         if (!response.ok) {
           throw new Error('Failed to fetch college experiences');
         }
@@ -68,4 +68,4 @@ const CollegeExperiencesPage = () => {
   );
 };
 
-export default CollegeExperiencesPage;
+export default CollegeApprovePage;
