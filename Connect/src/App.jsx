@@ -8,7 +8,7 @@ import Profile from "./pages/Profile";
 import Resumecard from "./components/Resumecard";
 import Workcard from "./components/Workcard";
 import Collegecard from "./components/Collegecard";
-import ResumeUpload from "./pages/UploadPage";
+
 import {
   Routes,
   Route,
