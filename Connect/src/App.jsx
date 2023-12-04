@@ -14,13 +14,18 @@ import {
   Route,
 } from "react-router-dom";  
 import AdminPage from "./pages/AdminPage";
+import LoginPage from "./pages/LoginPage";
+import AuthState from "./context/AuthState";
+import RegisterPage from './pages/RegisterPage'
 function App() {
   return (
     <div className="mt-2">
+      <AuthState>
     <Navbar/>
       <Routes>
 
-        <Route path="/" element={<Home/>} />
+        <Route path="/" element={<LoginPage/>} />
+        <Route path="/register" element={<RegisterPage/>} />
         <Route path="/admin" element={<AdminPage/>} />
         <Route path="/explore" element={<Explore/>} />
         <Route path="/contribute" element={<Contribute/>} />
@@ -30,6 +35,7 @@ function App() {
         <Route path="/workcard" element={<Workcard/>} />
         <Route path="/collegecard" element={<Collegecard/>} />
       </Routes>
+      </AuthState>
       <Footer/>
     </div>
   );

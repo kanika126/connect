@@ -12,8 +12,7 @@ app.use(express.json());
 
 // Uncomment the routes you want to include
 // app.use("/api/student", require("./routes/studentRoutes"));
-// app.use("/api/course", require("./routes/courseRoutes"));
-// app.use("/api/allocation", require("./routes/allocationRoutes"));
+app.use("/api/auth", require("./routes/authRoutes") )
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/alumni", require("./routes/alumniRoutes"));
 app.use("/api/clgexp", require("./routes/collegeExperienceRoutes"));
