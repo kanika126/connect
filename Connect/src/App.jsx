@@ -17,6 +17,7 @@ import AdminPage from "./pages/AdminPage";
 import LoginPage from "./pages/LoginPage";
 import AuthState from "./context/AuthState";
 import RegisterPage from './pages/RegisterPage'
+import ApprovePage from './components/ApprovePage'
 function App() {
   return (
     <div className="mt-2">
@@ -37,6 +38,7 @@ function App() {
         <Route path="/resumecard" element={<Resumecard/>} />
         <Route path="/workcard" element={<Workcard/>} />
         <Route path="/collegecard" element={<Collegecard/>} />
+        <Route path="/approve" element={<ApprovePage/>} />
       </Routes>
       </AuthState>
       <Footer/>

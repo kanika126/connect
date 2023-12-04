@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import AlumniTable from '../components/AdminTable';
-import alumniData from '../assets/Alumni.json'; // Import the JSON file
 
 const AdminPage = () => {
   const [alumniDataState, setAlumniDataState] = useState([]);
 
   useEffect(() => {
-    setAlumniDataState(alumniData);
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5001/api/alumni');
+        if (!response.ok) {
+          throw new Error('Failed to fetch alumni data');
+        }
+
+        const data = await response.json();
+        setAlumniDataState(data);
+      } catch (error) {
+        console.error('Error fetching alumni data:', error.message);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleProfileClick = (alumniId) => {

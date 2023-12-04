@@ -1,4 +1,7 @@
+
+const bcrypt = require('bcrypt');
 const Admin = require('../models/Admin');
+const CollegeExperience= require('../models/CollegeExperience')
 
 const getAdmins = async (req, res) => {
   try {
@@ -9,12 +12,18 @@ const getAdmins = async (req, res) => {
   }
 };
 
+
 const addAdmin = async (req, res) => {
   try {
     const { email, username, password } = req.body;
 
-    // Placeholder logic: Validate input and create a new admin
-    const newAdmin = new Admin({ email, username, password });
+    // Hash the password before saving
+    const hashedPassword = await bcrypt.hash(password, 10); // 10 is the number of salt rounds
+
+    // Create a new admin with the hashed password
+    const newAdmin = new Admin({ email, username, password: hashedPassword });
+    
+    // Save the admin to the database
     const savedAdmin = await newAdmin.save();
 
     res.status(201).json(savedAdmin);
@@ -22,6 +31,9 @@ const addAdmin = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+module.exports = { addAdmin };
+
 
 const getAdmin = async (req, res) => {
   try {
@@ -70,4 +82,24 @@ const deleteAdmin = async (req, res) => {
   }
 };
 
-module.exports = { getAdmins, addAdmin, getAdmin, updateAdmin, deleteAdmin };
+const approveCollegeExperience = async (req, res) => {
+  const { experienceId } = req.params;
+
+  try {
+    const updatedExperience = await CollegeExperience.findByIdAndUpdate(
+      experienceId,
+      { approved: true },
+      { new: true }
+    );
+
+    if (!updatedExperience) {
+      return res.status(404).json({ message: 'College experience not found' });
+    }
+
+    res.json(updatedExperience);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getAdmins, addAdmin, getAdmin, updateAdmin, deleteAdmin, approveCollegeExperience };

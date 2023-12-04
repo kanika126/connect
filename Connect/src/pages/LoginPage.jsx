@@ -30,7 +30,6 @@ const LoginPage = () => {
   };
 
   const handleAdminLogin = async (e) => {
-    console.log("admin tried");
     // // Handle admin login logic here
     if (email && password) {
       const response = await fetch(`${host}/api/auth/admin`, {
@@ -45,6 +44,7 @@ const LoginPage = () => {
       console.log(json);
     
       if (json.success) {
+        console.log("yayy")
         
         localStorage.setItem("token",json.authtoken)
         console.log(json.authtoken)
@@ -52,9 +52,7 @@ const LoginPage = () => {
         let userData = {
           role:decodedToken['role'],
           id: decodedToken['id'],
-          lab: decodedToken['lab'],
           username:decodedToken['username'],
-          email:decodedToken['email']
         };
         console.log(userData)
         login(userData);
@@ -92,7 +90,7 @@ const LoginPage = () => {
         };
         console.log(userData)
         login(userData);
-        navigate('/Alumni');
+        navigate('/home');
       } else {
         alert('Login Error');
       }
