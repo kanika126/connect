@@ -1,7 +1,7 @@
 import React from "react";
-import ClgExpContribute from "../components/ClgExpContribute";
-import WorkExpContribute from "../components/WorkExpContribute";
-import ResumeContribute from "../components/ResumeContribute";
+import ClgExpContribute from "../components/ContributionComponents/ClgExpContribute";
+import WorkExpContribute from "../components/ContributionComponents/WorkExpContribute";
+import ResumeContribute from "../components/ContributionComponents/ResumeContribute";
 export default function Contribute() {
   return (
     <div>

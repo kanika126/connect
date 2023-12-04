@@ -92,10 +92,11 @@ const verifyOtp = async (req, res) => {
 
 // Register a new Alumni
 // Alumni Login
-const AlumniLogin = async (req, res) => {
+const alumniLogin = async (req, res) => {
   console.log("Alumni")
   const { email, password } = req.body;
   const Alumni = await alumni.findOne({ email });
+  console.log(Alumni)
 
   if (!Alumni) {
     return res.status(401).json({ message: 'Alumni not found' });
@@ -148,4 +149,4 @@ const adminLogin = async (req, res) => {
 
 
 
-module.exports = { AlumniLogin, adminLogin,sendOtp, verifyOtp };
+module.exports = { alumniLogin, adminLogin,sendOtp, verifyOtp };

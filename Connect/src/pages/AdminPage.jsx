@@ -6,8 +6,6 @@ const AdminPage = () => {
   const [alumniDataState, setAlumniDataState] = useState([]);
 
   useEffect(() => {
-    // Simulate fetching data from an API or database
-    // In a real application, replace this with actual data fetching logic
     setAlumniDataState(alumniData);
   }, []);
 

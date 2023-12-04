@@ -21,10 +21,13 @@ function App() {
   return (
     <div className="mt-2">
       <AuthState>
+
+
     <Navbar/>
       <Routes>
 
-        <Route path="/" element={<LoginPage/>} />
+        <Route path="/" element={<Home/>} />
+        <Route path="/login" element={<LoginPage/>} />
         <Route path="/register" element={<RegisterPage/>} />
         <Route path="/admin" element={<AdminPage/>} />
         <Route path="/explore" element={<Explore/>} />

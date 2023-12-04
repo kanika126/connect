@@ -68,9 +68,8 @@ const LoginPage = () => {
   };
 
   const handleAlumniLogin = async () => {
-    console.log("Alumni  tried");
     if (email && password) {
-      const response = await fetch(`${host}/api/auth/Alumni`, {
+      const response = await fetch(`${host}/api/auth/alumni`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -110,7 +109,7 @@ const LoginPage = () => {
       console.log(email);
     }
   };
-  
+
   const handleSendOTP = async () => {
     console.log(email);
     if (email) {

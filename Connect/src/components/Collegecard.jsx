@@ -1,4 +1,4 @@
-import SlideshowComponent from '../components/SlideShow'
+import SlideshowComponent from './HomePage/SlideShow'
 const Collegecard = () => {
     return (
         <>
