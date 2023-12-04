@@ -2,7 +2,8 @@
 const bcrypt = require('bcrypt');
 const Admin = require('../models/Admin');
 const CollegeExperience= require('../models/CollegeExperience')
-
+const WorkExperience= require('../models/WorkExperience')
+const Resume= require('../models/Resume')
 const getAdmins = async (req, res) => {
   try {
     const admins = await Admin.find();
@@ -82,18 +83,44 @@ const deleteAdmin = async (req, res) => {
   }
 };
 
-const approveCollegeExperience = async (req, res) => {
+
+// Generic approval API
+const approveExperience = async (req, res) => {
   const { experienceId } = req.params;
+  const { type } = req.body; // Extract the experience type from the payload
 
   try {
-    const updatedExperience = await CollegeExperience.findByIdAndUpdate(
-      experienceId,
-      { approved: true },
-      { new: true }
-    );
+    let updatedExperience;
+
+    // Handle different types of experiences
+    switch (type) {
+      case 'college':
+        updatedExperience = await CollegeExperience.findByIdAndUpdate(
+          experienceId,
+          { approved: true },
+          { new: true }
+        );
+        break;
+      case 'work':
+        updatedExperience = await WorkExperience.findByIdAndUpdate(
+          experienceId,
+          { approved: true },
+          { new: true }
+        );
+        break;
+      case 'resume':
+        updatedExperience = await Resume.findByIdAndUpdate(
+          experienceId,
+          { approved: true },
+          { new: true }
+        );
+        break;
+      default:
+        return res.status(400).json({ message: 'Invalid experience type' });
+    }
 
     if (!updatedExperience) {
-      return res.status(404).json({ message: 'College experience not found' });
+      return res.status(404).json({ message: `${type} experience not found` });
     }
 
     res.json(updatedExperience);
@@ -102,4 +129,5 @@ const approveCollegeExperience = async (req, res) => {
   }
 };
 
-module.exports = { getAdmins, addAdmin, getAdmin, updateAdmin, deleteAdmin, approveCollegeExperience };
+
+module.exports = { approveExperience,getAdmins, addAdmin, getAdmin, updateAdmin, deleteAdmin };

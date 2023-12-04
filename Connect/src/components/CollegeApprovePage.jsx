@@ -6,7 +6,7 @@ const CollegeApprovePage = () => {
   useEffect(() => {
     const fetchExperiences = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/workexp');
+        const response = await fetch('http://localhost:5001/api/clgexp');
         if (!response.ok) {
           throw new Error('Failed to fetch college experiences');
         }
@@ -24,10 +24,13 @@ const CollegeApprovePage = () => {
   }, []);
 
   const handleApprove = async (experienceId) => {
-    console.log(experienceId)
     try {
       const response = await fetch(`http://localhost:5001/api/admin/approve/${experienceId}`, {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ type: 'college' }), // Pass the experience type in the request body
       });
 
       if (!response.ok) {
@@ -47,7 +50,7 @@ const CollegeApprovePage = () => {
     <div className="container mx-auto mt-8">
       <h1 className="text-3xl font-bold mb-4">College Experiences (Not Approved)</h1>
       {experiences.map((experience) => (
-        <div key={experience._id.$oid} className="bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-4">
+        <div key={experience._id} className="bg-white rounded-lg overflow-hidden shadow-lg p-6 mb-4">
           <p className="text-xl font-bold mb-2">Description:</p>
           <p className="mb-4">{experience.description}</p>
           <p className="text-xl font-bold mb-2">Semester:</p>
