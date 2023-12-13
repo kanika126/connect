@@ -1,8 +1,10 @@
-import SlideshowComponent from './HomePage/SlideShow'
+import React from 'react'
+import Resume from '../components/Explorecards/Resume'
 const Resumecard = () => {
     return (
         <>
-        <SlideshowComponent/></>
+           <Resume type="resume" />
+        </>
         );
 };
 

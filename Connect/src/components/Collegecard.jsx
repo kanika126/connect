@@ -1,8 +1,9 @@
-import SlideshowComponent from './HomePage/SlideShow'
+import React from 'react'
+import College from '../components/Explorecards/College'
 const Collegecard = () => {
     return (
         <>
-           <SlideshowComponent/>
+           <College type="clgexp" />
         </>
         );
 };

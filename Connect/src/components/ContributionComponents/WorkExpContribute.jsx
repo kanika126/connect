@@ -12,7 +12,6 @@ const WorkExpContribute = () => {
     endDate: "",
   });
 
-  const SemesterEnum = ["Sem 1", "Sem 2", "Sem 3", "Sem 4"];
   const [descriptionError, setDescriptionError] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -59,32 +58,53 @@ const WorkExpContribute = () => {
       onSubmit={handleSubmit}
       className="w-full mt-20 ml-20 mx-auto align-content: flex-start"
     >
-      <div className="font-bold text-2xl">College Experience</div>
+      <div className="font-bold text-2xl">Work Experience</div>
       <div className="grid md:grid-cols-2 m-1 md:gap-6">
         <div className="relative z-0 w-full mb-5 group">
-          <select
-            name="semester"
-            id="semester"
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            onChange={handleChange}
-            value={formData.semester}
-            required
-          >
-            <option value="" disabled hidden>
-              Select Semester
-            </option>
-            {SemesterEnum.map((semester) => (
-              <option key={semester} value={semester}>
-                {semester}
-              </option>
-            ))}
-          </select>
+        <input
+          type="text"
+          name="company"
+          id="company"
+          className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+            descriptionError ? "border-red-500" : ""
+          }`}
+          placeholder=" "
+          onChange={handleChange}
+          value={formData.company}
+          required
+        />
           <label
-            htmlFor="semester"
+            htmlFor="company"
             className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
-            Semester
+            Company
           </label>
+          {descriptionError && (
+          <p className="text-sm text-red-500 mt-1">Company is required.</p>
+        )}
+        </div>
+        <div className="relative z-0 w-full mb-5 group">
+        <input
+          type="text"
+          name="region"
+          id="region"
+          className={`block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer ${
+            descriptionError ? "border-red-500" : ""
+          }`}
+          placeholder=" "
+          onChange={handleChange}
+          value={formData.company}
+          required
+        />
+          <label
+            htmlFor="region"
+            className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          >
+            Region (Ex. Pune)
+          </label>
+          {descriptionError && (
+          <p className="text-sm text-red-500 mt-1">Region is required.</p>
+        )}
         </div>
       </div>
       <div className="relative z-0 w-full mb-5 group">

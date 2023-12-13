@@ -11,6 +11,8 @@ const ClgExpCard = ({ imageSrc, name, designation, description, tags }) => {
   };
 
   return (
+    <div className="w-1/2 flex flex-col items-center justify-center">
+          <p className="text-lg font-bold mb-4">Three Smaller Curved Boxes</p>
     <div className="bg-white w-48 h-48 rounded-2xl shadow-md p-4 transition-transform duration-500 ease-in-out transform hover:scale-105">
       <div className="flex justify-center items-center mb-2">
         <div className="w-10 h-10 rounded-full overflow-hidden">
@@ -41,6 +43,7 @@ const ClgExpCard = ({ imageSrc, name, designation, description, tags }) => {
           ) : null
         ))}
       </div>
+    </div>
     </div>
   );
 };

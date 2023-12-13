@@ -1,10 +1,9 @@
-
-import SlideshowComponent from './HomePage/SlideShow'
+import React from 'react'
+import Work from '../components/Explorecards/Work'
 const Workcard = () => {
     return (
         <>
-        <SlideshowComponent/>
-        Work
+           <Work type="workexp" />
         </>
         );
 };
