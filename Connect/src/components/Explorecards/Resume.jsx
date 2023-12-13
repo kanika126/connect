@@ -67,7 +67,7 @@ const Resume = (props) => {
                   semester={experience.semester}
                   description={experience.description}
                   tags={experience.tags}
-                  maxLines={3}
+                  maxLines={10}
                 />
               ) : (
                 <WorkExpCard
