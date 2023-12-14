@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ClgExpCard from "../Cards/ClgExpSmall";
 import WorkExpCard from "../Cards/WorkExpSmall";
 
+
 const SlideshowComponent = (props) => {
   const [selectedExperiences, setSelectedExperiences] = useState([]);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -61,7 +62,7 @@ const SlideshowComponent = (props) => {
         </div>
 
         <div className="w-1/2 flex flex-col items-center justify-center">
-          <p className="text-lg font-bold mb-4">Three Smaller Curved Boxes</p>
+          <p className="text-lg font-bold mb-4">Explore Experiences</p>
           <div className="flex items-center justify-center space-x-8">
             {selectedExperiences.map((experience) => (
               // Conditionally render ClgExpCard or WorkExpCard based on props.type
