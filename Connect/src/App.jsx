@@ -47,7 +47,16 @@ function App() {
                 path="/contribute/*"
               />
             {/* <Route path="/contribute" element={<Contribute />} /> */}
-            <Route path="/profile" element={<Profile />} />
+            <Route
+                element={
+                  <ProtectedRoute
+                    element={<Profile />}
+                    allowedRoles={['alumni']}
+                  />
+                }
+                path="/profile"
+              />
+            {/* <Route path="/profile" element={<Profile />} /> */}
             <Route path="/resources" element={<Resources />} />
             <Route path="/resumecard" element={<Resumecard />} />
             <Route path="/workexp" element={<Workcard />} />

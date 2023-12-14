@@ -13,9 +13,13 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    // Add your logout logic here
-    logout();
+    // Clear the token from storage
+    localStorage.removeItem('token');
+  
+    // Refresh the page
+    window.location.reload();
   };
+  
 
   return (
     <nav className="bg-indigo-100 rounded-lg shadow m-1">
