@@ -1,27 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import ClgExpLarge from "../components/Cards/ClgExpLarge";
 import WorkExpLarge from "../components/Cards/WorkExpLarge";
+import AuthContext from "../context/AuthContext";
 const Profile = () => {
   const [alumniData, setAlumniData] = useState(null);
   const [workExperiences, setWorkExperiences] = useState([]);
   const [collegeExperiences, setCollegeExperiences] = useState([]);
-  const alum = "656b65c981528540b2011c0b";
+  const {user} = useContext(AuthContext)
+  
   useEffect(() => {
     fetchDataFromBackend();
+    console.log(user)
   }, []);
 
   const fetchDataFromBackend = async () => {
+    console.log(user.id)
     try {
       const alumniResponse = await fetch(
-        "http://localhost:5001/api/alumni/656b65c981528540b2011c0b"
+        `http://localhost:5001/api/alumni/${user.id}`
       );
       if (alumniResponse.ok) {
         const alumniData = await alumniResponse.json();
         setAlumniData(alumniData);
 
         const workResponse = await fetch(
-          `http://localhost:5001/api/alumni/work/656b65c981528540b2011c0b`
+          `http://localhost:5001/api/alumni/work/${user.id}`
         );
         if (workResponse.ok) {
           const workData = await workResponse.json();
@@ -30,7 +34,7 @@ const Profile = () => {
 
         // Fetch college experiences for the alumni
         const collegeResponse = await fetch(
-          `http://localhost:5001/api/alumni/clg/656b65c981528540b2011c0b`
+          `http://localhost:5001/api/alumni/clg/${user.id}`
         );
         if (collegeResponse.ok) {
           const collegeData = await collegeResponse.json();
@@ -73,17 +77,30 @@ const Profile = () => {
     }
   };
 
-  const handleEditWorkExperience = (experienceId) => {
-    // Implement the edit logic
-    console.log(`Edit work experience with ID: ${experienceId}`);
+
+  const handleDeleteWorkExperience = async (experienceId) => {
+    try {
+      // Make API call to delete the work experience
+      const deleteResponse = await fetch(`http://localhost:5001/api/workexp/${experienceId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (deleteResponse.ok) {
+        // If deletion is successful, update the state or trigger a refresh in the parent component
+        setWorkExperiences((prevExperiences) =>
+          prevExperiences.filter((experience) => experience._id !== experienceId)
+        );
+        console.log(`Work experience with ID ${experienceId} deleted successfully.`);
+      } else {
+        console.error(`Error deleting work experience with ID ${experienceId}`);
+      }
+    } catch (error) {
+      console.error('Error deleting work experience:', error.message);
+    }
   };
-
-  const handleDeleteWorkExperience = (experienceId) => {
-    // Implement the delete logic
-    console.log(`Delete work experience with ID: ${experienceId}`);
-  };
-
-
   
   
   return (
