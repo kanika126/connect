@@ -2,7 +2,7 @@ import React from "react";
 
 const WorkExpLarge = ({ company, position, description, startDate, endDate, tags }) => {
   return (
-    <div className="flex-none max-w-400 bg-blue-100 border border-blue-300 p-4 m-2 rounded-2xl shadow-md">
+    <div className="flex-none max-w-400 bg-indigo-100 border border-indigo-300 p-4 m-2 rounded-2xl shadow-md">
       <div className="flex flex-col items-center justify-center mb-2">
         <div className="w-10 h-10 rounded-full overflow-hidden mb-2">
           <img
