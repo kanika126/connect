@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link } from 'react-router-dom';
 import AlumniTable from '../components/AdminTable';
-import alumniData from '../assets/Alumni.json'; // Import the JSON file
 
 const AdminPage = () => {
   const [alumniDataState, setAlumniDataState] = useState([]);
 
   useEffect(() => {
-    setAlumniDataState(alumniData);
+    fetchDataFromBackend();
   }, []);
+
+  const fetchDataFromBackend = async () => {
+    try {
+      const response = await fetch(`http://localhost:5001/api/alumni`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        setAlumniDataState(data);
+      } else {
+        console.error('Error fetching data from the backend');
+      }
+    } catch (error) {
+      console.error('Error fetching data from the backend:', error.message);
+    }
+  };
 
   const handleProfileClick = (alumniId) => {
     // Add logic to navigate to the profile page or show a modal

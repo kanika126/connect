@@ -100,4 +100,29 @@ const deleteCollegeExperience = async (req, res) => {
   }
 };
 
-module.exports = { getCollegeExperiences, addCollegeExperience, updateCollegeExperience, deleteCollegeExperience };
+const getCollegeExperienceById = async (req, res) => {
+  console.log("in" ,req.params.id)
+  try {
+    const collegeExperience = await CollegeExperience.findById(req.params.id)
+   
+    if (collegeExperience) {
+      const collegeExperienceWithAlumniName = {
+        name: collegeExperience.alumni.name,
+        description: collegeExperience.description,
+        time: collegeExperience.time,
+        semester: collegeExperience.semester,
+        tags: collegeExperience.tags,
+        approved: collegeExperience.approved,
+        // Add other fields if needed
+      };
+
+      res.json(collegeExperienceWithAlumniName);
+    } else {
+      res.status(404).json({ message: 'College experience not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getCollegeExperiences, addCollegeExperience, updateCollegeExperience, deleteCollegeExperience, getCollegeExperienceById };

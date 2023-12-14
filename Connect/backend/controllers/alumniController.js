@@ -3,6 +3,49 @@ const Alumni = require('../models/Alumni');
 const bcrypt = require('bcrypt');
 const saltRounds = 10; // Number of salt rounds for bcrypt hashing
 
+const CollegeExperience = require('../models/CollegeExperience');
+const WorkExperience = require('../models/WorkExperience');
+
+const getWorkExperiencesByAlumniId = async (req, res) => {
+  const alumniId = req.params.id;
+
+  try {
+    const alumni = await Alumni.findById(alumniId);
+
+    if (!alumni) {
+      return res.status(404).json({ message: 'Alumni not found' });
+    }
+
+    const workExperiences = await WorkExperience.find({ _id: { $in: alumni.workExperiences } });
+    res.json(workExperiences);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
+const getCollegeExperiencesByAlumniId = async (req, res) => {
+  const alumniId = req.params.id;
+ 
+
+  try {
+    const alumni = await Alumni.findById(alumniId);
+   
+
+    if (!alumni) {
+      return res.status(404).json({ message: 'Alumni not found' });
+    }
+
+    const collegeExperiences = await CollegeExperience.find({ _id: { $in: alumni.collegeExperiences } });
+    res.json(collegeExperiences);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
+
 const addAlumni = async (req, res) => {
   try {
     let alumniData = req.body;
@@ -53,6 +96,23 @@ const getAlumni = async (req, res) => {
   }
 };
 
+const getAlumniById = async (req, res) => {
+  const alumniId = req.params.id;
+
+  try {
+    const alumni = await Alumni.findById(alumniId);
+
+    if (!alumni) {
+      return res.status(404).json({ message: 'Alumni not found' });
+    }
+
+    res.json(alumni);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 
 
 const updateAlumni = async (req, res) => {
@@ -87,4 +147,4 @@ const deleteAlumni = async (req, res) => {
   }
 };
 
-module.exports = { getAlumni, addAlumni, updateAlumni, deleteAlumni };
+module.exports = { getWorkExperiencesByAlumniId ,getCollegeExperiencesByAlumniId, getAlumniById,getAlumni, addAlumni, updateAlumni, deleteAlumni };

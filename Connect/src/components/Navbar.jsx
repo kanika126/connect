@@ -1,37 +1,64 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import  AuthContext  from '../context/AuthContext';
- // Import your authentication context
+import AuthContext from '../context/AuthContext';
 
 const Navbar = () => {
-  // Assuming AuthContext provides information about the logged-in user
-  const {user} = useContext(AuthContext);
- 
-  const isAlumni = user && user.role === 'alumni'; // Adjust based on your authentication logic
-  console.log(isAlumni)
+  const { user, logout } = useContext(AuthContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const isAlumni = user && user.role === 'alumni';
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const handleLogout = () => {
+    // Add your logout logic here
+    logout();
+  };
+
   return (
     <nav className="bg-indigo-100 rounded-lg shadow m-1">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <div className="self-center text-2xl font-semibold whitespace-nowrap text-indigo-600">
           LETSCONNECT.
         </div>
-        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button
-            type="button"
-            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 "
-            id="user-menu-button"
-            aria-expanded="false"
-            data-dropdown-toggle="user-dropdown"
-            data-dropdown-placement="bottom"
-          >
-            <Link to="/profile" className="w-8 h-8 rounded-full">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBXNuO6PezhC18aYH_2cYtS0I7KbxoKYdwA&usqp=CAU"
-                alt="user photo"
-              />
-            </Link>
-          </button>
-        </div>
+        {user && ( // Only show the following section if there is a user
+          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
+            <button
+              type="button"
+              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 "
+              onClick={toggleDropdown}
+            >
+              <div className="w-8 h-8 rounded-full">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBXNuO6PezhC18aYH_2cYtS0I7KbxoKYdwA&usqp=CAU"
+                  alt="user photo"
+                />
+              </div>
+            </button>
+            {dropdownOpen && (
+              <div className="absolute top-full right-0 mt-2 bg-white border rounded-lg shadow-md overflow-hidden">
+                <ul className="py-2">
+                  <li>
+                    <Link to="/profile" className="block px-4 py-2 text-indigo-600">
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-2 text-indigo-600"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
         <div
           className="items w-full md:flex md:w-auto md:order-1"
           id="navbar-user"

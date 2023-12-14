@@ -1,12 +1,21 @@
 const express = require('express');
-const { getCollegeExperiences, addCollegeExperience, updateCollegeExperience, deleteCollegeExperience } = require('../controllers/collegeExperienceController');
-const { authenticateUser } = require('../middleware/authMiddleware'); // Import your authentication middleware
+const {
+  getCollegeExperiences,
+  addCollegeExperience,
+  updateCollegeExperience,
+  deleteCollegeExperience,
+  getCollegeExperienceById, // Add this line
+} = require('../controllers/collegeExperienceController');
+
 const router = express.Router();
 
 router.route('/')
-    .get( getCollegeExperiences)
-    .post( addCollegeExperience)
-    .put( updateCollegeExperience)
-    .delete( deleteCollegeExperience);
+  .get(getCollegeExperiences)
+  .post(addCollegeExperience);
+
+router.route('/:id')
+  .get(getCollegeExperienceById) // Add this line
+  .put(updateCollegeExperience)
+  .delete(deleteCollegeExperience);
 
 module.exports = router;

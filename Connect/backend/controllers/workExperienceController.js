@@ -88,4 +88,27 @@ const deleteWorkExperience = async (req, res) => {
   }
 };
 
-module.exports = { getWorkExperiences, addWorkExperience, updateWorkExperience, deleteWorkExperience };
+const getWorkExperienceById = async (req, res) => {
+  try {
+    const workExperience = await WorkExperience.findById(req.params.id).populate('alumni', 'name');
+
+    if (workExperience) {
+      const workExperienceWithAlumniName = {
+        name: workExperience.alumni.name,
+        role: workExperience.role,
+        company: workExperience.company,
+        startDate: workExperience.startDate,
+        endDate: workExperience.endDate,
+        description: workExperience.description,
+      };
+
+      res.json(workExperienceWithAlumniName);
+    } else {
+      res.status(404).json({ message: 'Work experience not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getWorkExperiences, addWorkExperience, updateWorkExperience, deleteWorkExperience, getWorkExperienceById };
