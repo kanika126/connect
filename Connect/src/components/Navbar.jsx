@@ -1,44 +1,76 @@
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import  AuthContext  from '../context/AuthContext';
+ // Import your authentication context
+
 const Navbar = () => {
+  // Assuming AuthContext provides information about the logged-in user
+  const {user} = useContext(AuthContext);
+ 
+  const isAlumni = user && user.role === 'alumni'; // Adjust based on your authentication logic
+  console.log(isAlumni)
   return (
-    
-
-<nav className="bg-indigo-100 rounded-lg shadow m-1 ">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  
-      <div className="self-center text-2xl font-semibold whitespace-nowrap text-indigo-600 ">LETSCONNECT.</div>
-  
-  <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 " id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-        
-        <a className="w-8 h-8 rounded-full" href="/profile" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBXNuO6PezhC18aYH_2cYtS0I7KbxoKYdwA&usqp=CAU" alt="user photo"/>
-      </button>
-      
-      
-  </div>
-  <div className="items w-full md:flex md:w-auto md:order-1" id="navbar-user">
-    <ul className="flex flex-col font-medium p-4 md:p-0 mt-4  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 ">
-      <li>
-        <a href="/" className="block py-2 px-3 text-indigo-600 rounded ">Home</a>
-      </li>
-      <li>
-        <a href="/explore" className="block py-2 px-3 text-indigo-600 rounded ">Explore</a>
-      </li>
-      <li>
-        <a href="/contribute" className="block py-2 px-3 text-indigo-600 rounded ">Contribute</a>
-      </li>
-      <li>
-        <a href="/resources" className="block py-2 px-3 text-indigo-600 rounded ">Resources</a>
-      </li>
-      <li>
-        <a href="/approve" className="block py-2 px-3 text-indigo-600 rounded ">Approve</a>
-      </li>
-    </ul>
-  </div>
-  </div>
-</nav>
-
+    <nav className="bg-indigo-100 rounded-lg shadow m-1">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="self-center text-2xl font-semibold whitespace-nowrap text-indigo-600">
+          LETSCONNECT.
+        </div>
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button
+            type="button"
+            className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 "
+            id="user-menu-button"
+            aria-expanded="false"
+            data-dropdown-toggle="user-dropdown"
+            data-dropdown-placement="bottom"
+          >
+            <Link to="/profile" className="w-8 h-8 rounded-full">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzBXNuO6PezhC18aYH_2cYtS0I7KbxoKYdwA&usqp=CAU"
+                alt="user photo"
+              />
+            </Link>
+          </button>
+        </div>
+        <div
+          className="items w-full md:flex md:w-auto md:order-1"
+          id="navbar-user"
+        >
+          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0">
+            <li>
+              <Link to="/" className="block py-2 px-3 text-indigo-600 rounded">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={isAlumni ? '/contribute' : '/login'}
+                className="block py-2 px-3 text-indigo-600 rounded"
+              >
+                Contribute
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/explore"
+                className="block py-2 px-3 text-indigo-600 rounded"
+              >
+                Explore
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/resources"
+                className="block py-2 px-3 text-indigo-600 rounded"
+              >
+                Resources
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
   );
 };
 
 export default Navbar;
-

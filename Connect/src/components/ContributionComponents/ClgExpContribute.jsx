@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-
+import React, { useState,useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 const ClgExpContribute = () => {
+  
+  const {user} = useContext(AuthContext)
   const [formData, setFormData] = useState({
     semester: "",
     description: "",
     tags: "",
-    alumni: "656b65c981528540b2011c0b",
+    alumni: user.id,
     // image: null,
   });
   const SemesterEnum = ['Sem 1', 'Sem 2', 'Sem 3', 'Sem 4'];

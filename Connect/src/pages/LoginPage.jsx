@@ -52,9 +52,7 @@ const LoginPage = () => {
         let userData = {
           role:decodedToken['role'],
           id: decodedToken['id'],
-          lab: decodedToken['lab'],
           username:decodedToken['username'],
-          email:decodedToken['email']
         };
         console.log(userData)
         login(userData);
@@ -88,11 +86,11 @@ const LoginPage = () => {
         const userData = {
           role:decodedToken['role'],
           id: decodedToken['id'],
-          email:decodedToken['email']
+          username:decodedToken['username']
         };
         console.log(userData)
         login(userData);
-        navigate('/Alumni');
+        navigate('/contribute');
       } else {
         alert('Login Error');
       }
