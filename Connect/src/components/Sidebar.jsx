@@ -10,9 +10,7 @@ const Sidebar = () => {
         <li>
           <Link to="/approve/clgexp">College Experiences</Link>
         </li>
-        <li>
-          <Link to="/approve/resume">Resumes</Link>
-        </li>
+        
         <li>
           <Link to="/approve/workexp">Work Experiences</Link>
         </li>
