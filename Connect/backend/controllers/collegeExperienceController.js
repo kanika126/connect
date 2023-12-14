@@ -3,12 +3,23 @@ const Alumni = require('../models/Alumni')
 
 const getCollegeExperiences = async (req, res) => {
   try {
-    const collegeExperiences = await CollegeExperience.find();
-    res.json(collegeExperiences);
+    const collegeExperiences = await CollegeExperience.find().populate('alumni', 'name');
+    const collegeExperiencesWithAlumniName = collegeExperiences.map((exp) => ({
+      name: exp.alumni.name,
+      description: exp.description,
+      time: exp.time,
+      semester: exp.semester,
+      tags: exp.tags,
+      approved: exp.approved,
+      // Add other fields if needed
+    }));
+
+    res.json(collegeExperiencesWithAlumniName);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 const addCollegeExperience = async (req, res) => {
   try {

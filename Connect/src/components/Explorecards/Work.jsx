@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ClgExpCard from "../HomePage/ClgExpCard";
-import WorkExpCard from "../HomePage/WorkExpCard";
+import ClgExpCard from "../Cards/ClgExpSmall";
+import WorkExpCard from "../Cards/WorkExpSmall";
 
 const Work = (props) => {
   const [selectedExperiences, setSelectedExperiences] = useState([]);

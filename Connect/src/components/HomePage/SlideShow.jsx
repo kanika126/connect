@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import ClgExpCard from "./ClgExpCard";
-import WorkExpCard from "./WorkExpCard";
+import ClgExpCard from "../Cards/ClgExpSmall";
+import WorkExpCard from "../Cards/WorkExpSmall";
 
 const SlideshowComponent = (props) => {
   const [selectedExperiences, setSelectedExperiences] = useState([]);
@@ -56,7 +56,7 @@ const SlideshowComponent = (props) => {
       <div className=" flex">
         <div className="w-1/2 mx-24">
           <div className="bg-gray-300 w-96 h-64 rounded-3xl ">
-            {/* Content of the larger box can be added here */}
+          
           </div>
         </div>
 
