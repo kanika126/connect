@@ -1,6 +1,6 @@
 const Admin = require('../models/Admin');
-const alumni = require('../models/Alumni');
-const argon2 = require('argon2');
+const Alumni = require('../models/Alumni');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const nodemailer = require( 'nodemailer' );
 const otpGenerator = require( 'otp-generator' );
@@ -93,58 +93,76 @@ const verifyOtp = async (req, res) => {
 // Register a new Alumni
 // Alumni Login
 const alumniLogin = async (req, res) => {
-  console.log("Alumni")
-  const { email, password } = req.body;
-  const Alumni = await alumni.findOne({ email });
-  console.log(Alumni)
+  try {
+    const { email, password } = req.body;
 
-  if (!Alumni) {
-    return res.status(401).json({ message: 'Alumni not found' });
+    // Find the alumni by email
+    const alumni = await Alumni.findOne({ email });
+
+    if (!alumni) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // Compare the provided password with the hashed password in the database
+    const passwordMatch = await bcrypt.compare(password, alumni.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // If authentication succeeds, generate a JWT token
+    const tokenPayload = {
+      id: alumni._id,
+      role: 'alumni',
+      username: alumni.name, // Replace with the actual property that contains the name
+    };
+
+    const authtoken = generateToken(tokenPayload);
+    const success = true
+    
+
+    res.status(200).json({ success ,message: 'Alumni login successful', authtoken });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
   }
-
-  const validPassword = await argon2.verify(Alumni.password, password);
-  if (!validPassword) {
-    return res.status(401).json({ message: 'Invalid password' });
-  }
-
-  const tokenPayload = {
-    id:Alumni._id,
-    name: Alumni.name,
-    email: Alumni.email,
-    role: 'Alumni',
-  };
-
-  const authtoken = generateToken(tokenPayload);
-  const success = true;
-
-  res.status(200).json({ success, authtoken, message: 'Alumni login successful' });
 };
 
-// Admin Login
 const adminLogin = async (req, res) => {
-  console.log("admin login initiated")
-  const { email, password } = req.body;
-  const admin = await Admin.findOne({ email });
+  try {
+    const { email, password } = req.body;
 
-  if (!admin) {
-    return res.status(401).json({ message: 'Admin not found' });
+    const admin = await Admin.findOne({ email });
+
+    if (!admin) {
+      console.log('Admin not found');
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    const passwordMatch = await bcrypt.compare(password, admin.password);
+
+    console.log('passwordMatch:', passwordMatch);
+
+    if (!passwordMatch) {
+      console.log('Password does not match');
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // If authentication succeeds, generate a JWT token
+    const tokenPayload = {
+      id: admin._id,
+      role: 'admin',
+      username: admin.username, // Replace with the actual property that contains the username
+    };
+
+    const authtoken = generateToken(tokenPayload);
+    const success = true
+    
+
+    res.status(200).json({ success ,message: 'Admin login successful', authtoken });
+  } catch (error) {
+    console.error('Error in adminLogin:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
-
-  const validPassword = await argon2.verify(admin.password, password);
-  if (!validPassword) {
-    return res.status(401).json({ message: 'Invalid password' });
-  }
-
-  const tokenPayload = {
-    id:Admin._id,
-    username: admin.username,
-    role: 'admin',
-  };
-
-  const authtoken = generateToken(tokenPayload);
-  const success = true;
-
-  res.status(200).json({ success,authtoken, message: 'Admin login successful' });
 };
 
 
